@@ -1,0 +1,1 @@
+let squaref x = x *. x;;
