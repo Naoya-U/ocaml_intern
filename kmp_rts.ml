@@ -12,11 +12,17 @@ let _ =
     (perf (fun () -> for i = 1 to count do ignore (kmp_fn s) done;
     kmp_fn s));
     Printf.printf "\nGenerating and compiling the specilized code (100 times)";
-    let skmp_fn = perf (fun () ->
-      for i = 1 to 99 do ignore(Runcode.run (Kmp_meta.kmp_search_meta w)) done;
-      Runcode.run (Kmp_meta.kmp_search_meta w)) in 
-    Printf.printf "Specialized kmp search: %d\n"
-        (perf (fun () -> for i = 1 to count do ignore (skmp_fn s) done;
-        skmp_fn s))
+    let skmp_fn0 = perf (fun () ->
+      for i = 1 to 99 do ignore(Runcode.run (Kmp_meta0.kmp_search_meta w)) done;
+      Runcode.run (Kmp_meta0.kmp_search_meta w)) in 
+    Printf.printf "Specialized kmp search0: %d\n"
+        (perf (fun () -> for i = 1 to count do ignore (skmp_fn0 s) done;
+        skmp_fn0 s));
+    let skmp_fn1 = perf (fun () ->
+      for i = 1 to 99 do ignore(Runcode.run (Kmp_meta1.kmp_search_meta w)) done;
+      Runcode.run (Kmp_meta1.kmp_search_meta w)) in 
+    Printf.printf "Specialized kmp search1: %d\n"
+        (perf (fun () -> for i = 1 to count do ignore (skmp_fn1 s) done;
+        skmp_fn1 s))
     in 
     go 10000 "abababc" "babbbabcbaababbacccabababcbbaaab";;
