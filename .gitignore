@@ -1,0 +1,9 @@
+*.cmi
+*.cmo
+*.cmx
+*.o
+*.log
+*.cache
+kmp_rts
+kmp_test
+power_rts
