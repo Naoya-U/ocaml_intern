@@ -1,21 +1,28 @@
-open OUnit2
+let test_kmp =
+  let test1 = (4 = (Kmp.kmp_search "a" "bbbbabbbbb")) in
+  let test2 = (0 = (Kmp.kmp_search "a" "abbbb")) in
+  let test3 =  (5 = (Kmp.kmp_search "a" "bbbbb")) in
+  let test4 =  (0 = (Kmp.kmp_search "aaaaa" "aaaaaaaaaa")) in
+  let test5 =  (5 = (Kmp.kmp_search "aaaaa" "aaabbaaaaaaaaaa")) in
+  let test6 =  (6 = (Kmp.kmp_search "aaaaa" "bbbbbb")) in
+  if (test1 && test2 && test3 && test4 && test5 && test6) then
+    Printf.printf "Unspecialized kmp: test passed\n"
+  else
+    Printf.printf "Unspecialized kmp: test failed\n"
 
-let test1 test_ctx = assert_equal 4 (Kmp.kmp_search "a" "bbbbabbbbb")
-let test2 test_ctx = assert_equal 0 (Kmp.kmp_search "a" "abbbb")
-let test3 test_ctx = assert_equal 5 (Kmp.kmp_search "a" "bbbbb")
-let test4 test_ctx = assert_equal 0 (Kmp.kmp_search "aaaaa" "aaaaaaaaaa")
-let test5 test_ctx = assert_equal 5 (Kmp.kmp_search "aaaaa" "aaabbaaaaaaaaaa")
-let test6 test_ctx = assert_equal 6 (Kmp.kmp_search "aaaaa" "bbbbbb")
+let test_kmp_meta =
+  let test1 = (4 = (Runcode.run (Kmp_meta.kmp_search_meta "a") "bbbbabbbbb")) in
+  let test2 = (0 = (Runcode.run (Kmp_meta.kmp_search_meta "a") "abbbb")) in
+  let test3 =  (5 = (Runcode.run (Kmp_meta.kmp_search_meta "a") "bbbbb")) in
+  let test4 =  (0 = (Runcode.run (Kmp_meta.kmp_search_meta "aaaaa") "aaaaaaaaaa")) in
+  let test5 =  (5 = (Runcode.run (Kmp_meta.kmp_search_meta "aaaaa") "aaabbaaaaaaaaaa")) in
+  let test6 =  (6 = (Runcode.run (Kmp_meta.kmp_search_meta "aaaaa") "bbbbbb")) in
+  if (test1 && test2 && test3 && test4 && test5 && test6) then
+    Printf.printf "Specialized kmp: test passed\n"
+  else
+    Printf.printf "Specialized kmp: test failed\n"
 
 
-
-let suite =
-  "suite" >:::
-  ["test1">:: test1;
-    "test2">:: test2;
-    "test3">:: test3;
-    "test4">:: test4;
-    "test5">:: test5;
-    "test6">:: test6;]
-
-let _ = run_test_tt_main suite
+let _ =
+  test_kmp;
+  test_kmp_meta
