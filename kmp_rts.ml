@@ -25,4 +25,4 @@ let _ =
         (perf (fun () -> for i = 1 to count do ignore (skmp_fn1 s) done;
         skmp_fn1 s))
     in 
-    go 10000 "abababc" "babbbabcbaababbacccabababcbbaaab";;
+    go 1000000 "abababc" "babbbabcbaababbacccabababcbbaaab";;
