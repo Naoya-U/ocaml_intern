@@ -42,5 +42,3 @@ let kmp_search_meta: string -> (string -> int) code =
     )
     done;
     !out>.;; 
-
-let _ = Runcode.run (kmp_search_meta "abababc") "babbbabcbaababbacccabababcbbaaab";;

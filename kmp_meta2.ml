@@ -20,6 +20,18 @@ let kmp_table_meta : (string -> int array) = fun w ->
   table;;
 
 let table_to_func: int array -> ((int -> int) code) =
+fun x -> 
+  let len = Array.length x in 
+  .<fun j ->
+  .~(let rec build i =
+    if i >= len then .<-1>.
+    else
+      let vi = x.(i) in 
+      let rest = build (i + 1) in 
+      .<if .~(.<j>.) = i then .~(.<vi>.) else .~rest>.
+    in
+    build 0)>.
+
 (*
   input: [0, 2, 4, 5, 3]
 
@@ -31,14 +43,14 @@ let table_to_func: int array -> ((int -> int) code) =
             else if j = 4 then 3
             else -1 >.
 *)
-  ???
+
 
 let kmp_search_meta: string -> (string -> int) code =
   fun w ->
   let table = kmp_table_meta w in
+  let len_w = String.length w in 
   .<fun s ->
     let len_s = String.length s in 
-    let len_w = String.length w in 
     let out = ref len_s in 
     let m = ref 0 in
     let i = ref 0 in 
@@ -58,5 +70,3 @@ let kmp_search_meta: string -> (string -> int) code =
     )
     done;
     !out>.;; 
-
-let _ = Runcode.run (kmp_search_meta "abababc") "babbbabcbaababbacccabababcbbaaab";;
