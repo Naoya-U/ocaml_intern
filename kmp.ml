@@ -1,4 +1,4 @@
-let kmp_table w =
+let kmp_table : (string -> int array) = fun w ->
   let len_w = String.length w in
   let table = Array.make len_w 0 in 
   let i = ref 2 in
@@ -19,7 +19,7 @@ let kmp_table w =
   done;
   table;;
 
-let kmp_search w s =
+let kmp_search : (string -> string -> int) = fun w s ->
   let len_s = String.length s in 
   let len_w = String.length w in 
   let out = ref len_s in 
@@ -41,4 +41,7 @@ let kmp_search w s =
   done;
   !out;;
 
-let _ = kmp_search "abababc" "babbbabcbaababbacccabababcbbaaab";;
+  (*
+  s: abcdcaa
+  w: abcdab
+  *)

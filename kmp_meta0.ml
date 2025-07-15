@@ -42,3 +42,6 @@ let kmp_search_meta: string -> (string -> int) code = fun w -> .<fun s ->
   )
   done;
   !out>.;; 
+
+(* 元のKMP法のコード全体をそのまま多段階化したような形になっており、
+　　多段階化による恩恵をほとんど得られていない *)

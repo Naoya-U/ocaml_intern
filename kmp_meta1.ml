@@ -42,3 +42,6 @@ let kmp_search_meta: string -> (string -> int) code =
     )
     done;
     !out>.;; 
+
+(* KMP法のアルゴリズムで使用するテーブルは探す文字列wがあれば前もって作れるので、
+　　テーブルを作成する部分を多段階化する部分から外している。*)
